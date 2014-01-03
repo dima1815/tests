@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="com.mycomp.jira.execspec.execspec-jira-plugin" name="Executable Specification"
+                  plugins-version="2">
+
+    <plugin-info>
+        <description>Executable Specification Jira Plugin</description>
+        <version>0.1</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    </plugin-info>
+
+    <!-- ==================================================================================================== -->
+    <!--3rd party javascript and css-->
+    <!-- ==================================================================================================== -->
+    <web-resource key="angularJsResource" name="AngularJS Resource">
+        <resource type="download" name="angular.min.js" location="js/external/angular.min.1.1.5.js">
+            <param name="content-type" value="text/javascript"/>
+        </resource>
+        <resource type="download" name="xeditable.min.0.1.7.js" location="js/external/xeditable.min.0.1.7.js">
+            <param name="content-type" value="text/javascript"/>
+        </resource>
+        <!--<resource type="download" name="bootstrap.min.css" location="css/external/bootstrap.min.css">-->
+            <!--<param name="content-type" value="text/css"/>-->
+        <!--</resource>-->
+        <context>jira.view.issue</context>
+    </web-resource>
+
+    <!-- ==================================================================================================== -->
+    <!--custom javascript and css-->
+    <!-- ==================================================================================================== -->
+    <web-resource key="storyServiceJsResource" name="Story Service Resource">
+        <resource type="download" name="story-service.js" location="js/custom/story-service.js">
+            <param name="content-type" value="text/javascript"/>
+        </resource>
+        <resource type="download" name="custom-style.css" location="css/custom/custom-style.css">
+            <param name="content-type" value="text/css"/>
+        </resource>
+        <context>jira.view.issue</context>
+    </web-resource>
+
+    <!-- ==================================================================================================== -->
+    <!-- REST api-->
+    <!-- ==================================================================================================== -->
+    <rest name="Story Resource" i18n-name-key="story-resource.name" key="stories-res" path="/story-res" version="1.0">
+        <description key="story-resource.description">The story rest resource plugin</description>
+    </rest>
+
+    <!-- ==================================================================================================== -->
+    <!-- View Issue page related stuff -->
+    <!-- ==================================================================================================== -->
+
+    <resource type="i18n" name="story-dialog" location="i18n/story-dialog"/>
+    <resource type="i18n" name="exec-spec-panel" location="i18n/exec-spec-panel"/>
+
+    <web-panel name="Executable Stories" i18n-name-key="acceptancetests-panel.name"
+               key="acceptancetests-panel" location="atl.jira.view.issue.left.context" weight="211">
+        <description key="acceptancetests-panel.description">Excecutable Stories</description>
+        <resource name="view" type="velocity"
+                  location="templates/velocity/view-issue-page/executable-specs-template.vm"/>
+        <label key="acceptancetests-panel.title"/>
+        <context-provider class="com.mycomp.execspec.jiraplugin.ui.contextproviders.ViewIssueStoriesContextProvider"/>
+    </web-panel>
+
+    <!-- ==================================================================================================== -->
+    <!-- Active Objects stuff -->
+    <!-- ==================================================================================================== -->
+    <component-import key="ao" name="Active Objects service"
+                      interface="com.atlassian.activeobjects.external.ActiveObjects">
+        <description>Component to access Active Objects functionality from the plugin</description>
+    </component-import>
+    <component key="tx-processor" name="Transactional Annotation Processor"
+               class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor">
+        <decription>Processes @Transactional annotations.</decription>
+    </component>
+    <ao key="ao-module">
+        <description>The module configuring the Active Objects service used by this plugin</description>
+        <entity>com.mycomp.execspec.jiraplugin.ao.StoryAO</entity>
+    </ao>
+
+    <!-- ==================================================================================================== -->
+    <!-- Custom components -->
+    <!-- ==================================================================================================== -->
+    <component key="story-dao" name="Story DAO" class="com.mycomp.execspec.jiraplugin.ao.StoryDaoImpl"/>
+    <component key="story-service" name="Story Service"
+               class="com.mycomp.execspec.jiraplugin.service.StoryServiceImpl"/>
+
+</atlassian-plugin>

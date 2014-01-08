@@ -43,7 +43,7 @@
                 <version>${ao.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <!--other atlassian-->
+            <!-- other atlassian -->
             <dependency>
                 <groupId>com.atlassian.plugins.rest</groupId>
                 <artifactId>atlassian-rest-common</artifactId>

@@ -12,18 +12,18 @@
     <!-- ==================================================================================================== -->
     <!--3rd party javascript and css-->
     <!-- ==================================================================================================== -->
-    <web-resource key="angularJsResource" name="AngularJS Resource">
-        <resource type="download" name="angular.min.js" location="js/external/angular.min.1.1.5.js">
-            <param name="content-type" value="text/javascript"/>
-        </resource>
-        <resource type="download" name="xeditable.min.0.1.7.js" location="js/external/xeditable.min.0.1.7.js">
-            <param name="content-type" value="text/javascript"/>
-        </resource>
+    <!--<web-resource key="angularJsResource" name="AngularJS Resource">-->
+        <!--<resource type="download" name="angular.min.js" location="js/external/angular.min.1.1.5.js">-->
+            <!--<param name="content-type" value="text/javascript"/>-->
+        <!--</resource>-->
+        <!--<resource type="download" name="xeditable.min.0.1.7.js" location="js/external/xeditable.min.0.1.7.js">-->
+            <!--<param name="content-type" value="text/javascript"/>-->
+        <!--</resource>-->
         <!--<resource type="download" name="bootstrap.min.css" location="css/external/bootstrap.min.css">-->
             <!--<param name="content-type" value="text/css"/>-->
         <!--</resource>-->
-        <context>jira.view.issue</context>
-    </web-resource>
+        <!--<context>jira.view.issue</context>-->
+    <!--</web-resource>-->
 
     <!-- ==================================================================================================== -->
     <!--custom javascript and css-->

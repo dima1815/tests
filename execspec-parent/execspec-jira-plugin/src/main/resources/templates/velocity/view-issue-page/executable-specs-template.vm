@@ -8,11 +8,10 @@
     <div>
         <br/>Other tests<br/>
 
-        <button id="dialog-button" class="aui-button">Show dialog</button>
-        <br/><br/>
-        <button id="dialog-2-button" class="aui-button">Show dialog 2</button>
+        <div id="main-container" class="aui-panel">
+            Here should be inserted the soy template stuff
+        </div>
 
     </div>
-
 
 </div>

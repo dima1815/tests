@@ -18,7 +18,7 @@ AJS.$(function () {
 
     JIRA.Dialogs.scheduleIssue = new JIRA.FormDialog({
         id: "schedule-dialog",
-        trigger: "a.issueaction-schedule-issue", 
+        trigger: "a.issueaction-schedule-issueOFF",
         ajaxOptions: JIRA.Dialogs.getDefaultAjaxOptions,
         onSuccessfulSubmit : function(){  // This method is used to define behaviour on a successful form submission.
             // We want to get the versions specified then place them in the view.

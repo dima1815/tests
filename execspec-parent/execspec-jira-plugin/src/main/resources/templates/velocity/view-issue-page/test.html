@@ -1,0 +1,49 @@
+<html>
+<head>
+    <link href="aui/css/aui-all.css" rel="stylesheet" type="text/css">
+    <link href="component-output.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-all.js" type="text/javascript"></script>
+    <style></style>
+    <style type="text/css"></style>
+    <script src="component-output.js"></script>
+</head>
+<body style="overflow: hidden;">
+<button class="aui-button" id="dialog-show-button">Show dialog</button>
+<section class="aui-layer aui-dialog2 aui-dialog2-medium" id="demo-dialog" role="dialog" aria-hidden="false"
+         style="z-index: 3000;" data-aui-focus-selector=".aui-dialog2-content :input:visible:enabled"
+         data-aui-blanketed="true">
+    <!-- Dialog header -->
+    <header class="aui-dialog2-header">
+        <!-- The dialog's title -->
+        <h1 class="aui-dialog2-header-main">Hello World</h1>
+        <!-- Actions to render to the left of the title -->
+        <div class="aui-dialog2-header-actions">
+            <button class="aui-button" id="demo-header-action">Header Action</button>
+        </div>
+        <!-- Actions to render on the right of the header -->
+        <div class="aui-dialog2-header-secondary">
+            <input name="search" id="demo-search" type="text">
+        </div>
+        <!-- Close icon -->
+        <a class="aui-dialog2-header-close">
+            <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+        </a>
+    </header>
+    <!-- Main dialog content -->
+    <div class="aui-dialog2-content">
+        <p>Hello World</p>
+    </div>
+    <!-- Dialog footer -->
+    <footer class="aui-dialog2-footer">
+        <!-- Actions to render on the right of the footer -->
+        <div class="aui-dialog2-footer-actions">
+            <button class="aui-button aui-button-link" id="dialog-close-button">Close</button>
+        </div>
+        <!-- Hint text is rendered on the left of the footer -->
+        <div class="aui-dialog2-footer-hint">this is a hint</div>
+    </footer>
+</section>
+<div class="aui-blanket" style="z-index: 2980;"></div>
+</body>
+</html>

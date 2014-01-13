@@ -9,7 +9,8 @@
             <div ng-repeat="story in stories">
                 <div id="main" ng-app>
                     <!-- navigation buttons -->
-                    <nav class="{{ story.activeView }}" ng-click="$event.preventDefault()" ng-init="story.activeView='overview'">
+                    <nav class="{{ story.activeView }}" ng-click="$event.preventDefault()"
+                         ng-init="story.activeView='overview'">
                         <a href="#" class="overview" ng-click="story.activeView='overview'">Overview</a>
                         <a href="#" class="run-history" ng-click="story.activeView='run-history'">Run History</a>
                     </nav>
@@ -40,16 +41,16 @@
         <textarea rows="4" cols="50" name="comment" ng-model="newStory.narrative"></textarea>
         <br>
         <button ng-click="addStory()">Save</button>
-##        <br> <br>
-##        New story narrative: {{ newStory.narrative }}
+        ##        <br> <br>
+        ##        New story narrative: {{ newStory.narrative }}
 
-##        <br>
-##        <br>
-##        <a href="#/partial2">Link to partial2</a>
+        ##        <br>
+        ##        <br>
+        ##        <a href="#/partial2">Link to partial2</a>
 
-##        <br>
-##        <br>
-##        Last rest response = {{ responseStatus }}
+        ##        <br>
+        ##        <br>
+        ##        Last rest response = {{ responseStatus }}
 
     </script>
 
@@ -164,19 +165,21 @@
                 }
         );
 
+
     </script>
 
-##    <br/>
-##    <br/>
-##    <a href="/jira/secure/CreateStoryAction!default.jspa?id=$issue.id">[Add New]</a>
-##    <br>
-##    <br>
-##    <br>
-##    <br>
-##    <button ng-click="count = count + 1" ng-init="count=100">Increment</button>
-##    count: {{ count }}
-##    <br>
-##    <br>
+    ## <br/>
+    ## <br/>
+    ## <a href="/jira/secure/CreateStoryAction!default.jspa?id=$issue.id">[Add New]</a>
+    ## <br>
+    ## <br>
+    ## <br>
+    ## <br>
+    ##
+    <button ng-click="count = count + 1" ng-init="count=100">Increment</button>
+    ## count: {{ count }}
+    ## <br>
+    ## <br>
 
 
 </div>

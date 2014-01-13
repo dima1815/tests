@@ -15,15 +15,22 @@ AJS.$(function() {
     // adds header for first page
     dialog.addHeader("Add New Story");
     // add panel 1
-    dialog.addPanel("Narrative: ", "<p>Some content for panel 1.</p>", "panel-body");
-    dialog.addPanel("Scenario: 1", "<p>Some content for panel 1.</p>", "panel-body");
+    dialog.addPanel("Narrative: ", "<div id='narrativePanel'>Some content for panel 1.</div>", "panel-body");
+    AJS.$('#narrativePanel').html(execspec.view.addStoryForm.narrative());
+
+    dialog.addPanel("Scenario: 1", "<div id='scenarioOnePanel'>Some content for panel 1.</div>", "panel-body");
     // You can remove padding with:
     // dialog.get("panel:0").setPadding(0);
+    AJS.$('#scenarioOnePanel').html(execspec.view.addStoryForm.render());
 
     // add panel 2 (this will create a menu on the left side for selecting panels within page 0)
     var panel2 = dialog.addPanel("Scenario: 2", "<p>Some content for panel 2.</p><div style='height: 2000px;'>(forced-height element to demonstrate scrolling content)</div><p>End.</p>", "panel-body");
 
     var panel3 = dialog.addPanel("Scenario: 3", "<p>Some content for panel 2.</p><div style='height: 2000px;'>(forced-height element to demonstrate scrolling content)</div><p>End.</p>", "panel-body");
+
+    dialog.addButton("Edit", function (dialog) {
+        alert("Edit clicked");
+    }, "aui-button aui-button-subtle");
 
     dialog.addButton("Save", function (dialog) {
         dialog.hide();
@@ -31,6 +38,7 @@ AJS.$(function() {
     dialog.addLink("Cancel", function (dialog) {
         dialog.hide();
     }, "#");
+
 
     // Add events to dialog trigger elements
     AJS.$("a.add-new-story-button").click(function() {

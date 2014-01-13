@@ -10,7 +10,7 @@
     <!-- ==================================================================================================== -->
     <!--custom javascript and css-->
     <!-- ==================================================================================================== -->
-    <web-resource name="Story Service Resources" key="story-service-resources" >
+    <web-resource name="Story Service Resources" key="story-service-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:dialog2</dependency>
         <resource type="download" name="story-service.js" location="js/custom/story-service.js">
@@ -27,14 +27,16 @@
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="jira-example-plugin.js" location="/js/custom/jira-example-plugin.js"/>
         <transformation extension="soy">
-            <transformer key="soyTransformer" />
+            <transformer key="soyTransformer"/>
         </transformation>
-        <!-- javascript -->
-        <resource type="download" name="PluginController.js" location="js/custom/PluginController.js" />
-        <resource type="download" name="PluginModel.js" location="js/custom/PluginModel.js" />
-        <resource type="download" name="PluginView.js" location="js/custom/PluginView.js" />
         <!-- soy -->
-        <resource type="download" name="PluginView.soy.js" location="templates/soy/view-issue-page/PluginView.soy" />
+        <resource type="download" name="PluginView.soy.js" location="templates/soy/view-issue-page/PluginView.soy"/>
+        <resource type="download" name="AddNewStoryForm.soy.js"
+                  location="templates/soy/view-issue-page/AddNewStoryForm.soy"/>
+        <!-- javascript -->
+        <resource type="download" name="PluginController.js" location="js/custom/PluginController.js"/>
+        <resource type="download" name="PluginModel.js" location="js/custom/PluginModel.js"/>
+        <resource type="download" name="PluginView.js" location="js/custom/PluginView.js"/>
 
         <context>jira.view.issue</context>
     </web-resource>
@@ -54,7 +56,8 @@
     <resource type="i18n" name="exec-spec-panel" location="i18n/exec-spec-panel"/>
 
     <!-- tool bar button to Add New Story -->
-    <web-item name="Schedule Web Item" i18n-name-key="schedule-web-item.name" key="schedule-web-item" section="operations-top-level" weight="3">
+    <web-item name="Schedule Web Item" i18n-name-key="schedule-web-item.name" key="schedule-web-item"
+              section="operations-top-level" weight="3">
         <description key="schedule-web-item.description">The Schedule Web Item Plugin</description>
         <conditions type="and">
             <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsIssueEditableCondition"/>
@@ -79,7 +82,6 @@
         <label key="acceptancetests-panel.title"/>
         <context-provider class="com.mycomp.execspec.jiraplugin.ui.contextproviders.ViewIssueStoriesContextProvider"/>
     </web-panel>
-
 
 
     <!-- ==================================================================================================== -->

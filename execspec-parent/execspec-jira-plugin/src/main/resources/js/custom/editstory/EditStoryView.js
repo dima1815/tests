@@ -1,24 +1,26 @@
 function EditStoryView(controller) {
 
     var $this = this;
-    var $controller = controller;
+    var $c = controller;
 
     this.dialog = undefined;
     this.totalScenarios = 0;
     this.scenarioIndex = 0;
+
+    this.narrativePanelClass = "narrativePanel";
 
     this.init = function () {
 
         console.log("initializing EditStoryView");
 
         // Add dialog trigger to toolbar button
-        AJS.$("a.add-new-story-button").click(function() {
+        AJS.$("a.add-new-story-button").click(function () {
             $this.showDialog();
             return false;
         });
     }
 
-    this.showDialog = function() {
+    this.showDialog = function () {
 
         if (this.dialog !== undefined) {
             console.log("dialog !== undefined");
@@ -26,10 +28,10 @@ function EditStoryView(controller) {
         }
 
         this.dialog = new AJS.Dialog({
-               width: 960,
-               height: 500,
-               id: "editStoryDialog",
-               closeOnOutsideClick: true
+            width: 960,
+            height: 500,
+            id: "editStoryDialog",
+            closeOnOutsideClick: true
         });
 
 
@@ -37,44 +39,44 @@ function EditStoryView(controller) {
         // adds header for first page
         this.dialog.addHeader("Add New Story");
 
-        var narrativePanelClass = "narrativePanel";
-        this.dialog.addPanel("Narrative: ", "Default content for panel.", narrativePanelClass);
-        AJS.$("." + narrativePanelClass).html(execspec.viewissuepage.editstory.narrative());
+        this.dialog.addPanel("Narrative: ", "Default content for panel.", this.narrativePanelClass);
+        AJS.$("." + this.narrativePanelClass).html(execspec.viewissuepage.editstory.narrative());
 
 
-       /*********************************************************************************
-       ** Buttons
-       **********************************************************************************/
-        this.dialog.addButton("Add", function() {
+        /*********************************************************************************
+         ** Buttons
+         **********************************************************************************/
+        this.dialog.addButton("Add", function () {
             $this.addScenarioButtonHandler();
             return false;
         });
         // add first scenario panel - as one scenario should always be present at minimum
         this.addScenarioButtonHandler();
 
-        this.dialog.addButton("Remove", function() {
+        this.dialog.addButton("Remove", function () {
             $this.removeScenarioButtonHandler();
             return false;
         });
 
         this.dialog.addButton("Up", function () {
-           console("Moving up");
+            console("Moving up");
         });
 
         this.dialog.addButton("Down", function () {
-           console("Moving down");
+            console("Moving down");
         });
 
         this.dialog.addButton("Edit", function () {
-           console("Editing");
+            console("Editing");
         });
 
         this.dialog.addButton("Save", function () {
-           console("Saving");
+            $this.saveButtonHandler();
+            return false;
         });
 
         this.dialog.addLink("Cancel", function () {
-           this.dialog.remove();
+            $this.dialog.remove();
         }, "#");
 
         // PREPARE FOR DISPLAY
@@ -84,7 +86,7 @@ function EditStoryView(controller) {
         this.dialog.show();
 
         console.log("dialog was shown successfully");
-    };
+    }
 
     this.addScenarioButtonHandler = function () {
 
@@ -96,7 +98,7 @@ function EditStoryView(controller) {
         var panelClass = "scenarioPanel" + this.scenarioIndex;
         this.dialog.addPanel("Scenario " + this.scenarioIndex + ":", "Default content for panel", panelClass);
         var tpParams = {
-            "inputElementId" : panelClass + "content"
+            "inputElementId": panelClass + "content"
         };
         AJS.$("." + panelClass).html(execspec.viewissuepage.editstory.inputArea(tpParams));
 
@@ -131,6 +133,16 @@ function EditStoryView(controller) {
         }
     };
 
+    this.saveButtonHandler = function () {
+        console.log("Saving");
+        $c.saveStoryInput();
+    }
+
+    this.getNarrative = function () {
+        var e = AJS.$("#inputNarrative");
+        var narrativeVal = e.val();
+        return narrativeVal;
+    }
 }
 
 

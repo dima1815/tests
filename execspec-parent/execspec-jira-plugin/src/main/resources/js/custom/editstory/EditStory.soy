@@ -3,10 +3,11 @@
 /**
  */
 {template .narrative}
-    <form class="aui top-label">
-        <fieldset>
-            <div class="field-group">
-                <textarea class="textarea full-width-field" name="comment" id="textarea-id" placeholder="Story narrative here..."></textarea>
+    <form id="inputFormNarrative" style="height:100%" class="aui top-label" onsubmit="alert('in form submit'); return false;" action="#">
+        <fieldset style="height:100%">
+            <div class="field-group" style="height:100%">
+                <textarea id="inputNarrative" class="textarea full-width-field" style="height:100%"
+                    name="comment" placeholder="Story narrative here..."></textarea>
             </div>
         </fieldset>
     </form>
@@ -17,10 +18,10 @@
  * @param inputElementId
  */
 {template .inputArea}
-    <form class="aui top-label">
-        <fieldset>
-            <div class="field-group">
-                <textarea id="{$inputElementId}.input" class="textarea full-width-field" name="comment" placeholder="Enter scenario steps here ..."></textarea>
+    <form class="aui top-label" style="height:100%">
+        <fieldset style="height:100%">
+            <div class="field-group" style="height:100%">
+                <textarea style="height:100%" id="{$inputElementId}.input" class="textarea full-width-field" name="comment" placeholder="Enter scenario steps here ..."></textarea>
             </div>
         </fieldset>
     </form>

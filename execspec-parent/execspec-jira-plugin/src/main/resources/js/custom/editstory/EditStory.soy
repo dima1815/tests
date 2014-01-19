@@ -1,0 +1,27 @@
+{namespace execspec.viewissuepage.editstory}
+
+/**
+ */
+{template .narrative}
+    <form class="aui top-label">
+        <fieldset>
+            <div class="field-group">
+                <textarea class="textarea full-width-field" name="comment" id="textarea-id" placeholder="Story narrative here..."></textarea>
+            </div>
+        </fieldset>
+    </form>
+{/template}
+
+/**
+ * Renders an input textarea for the edit/add story dialog
+ * @param inputElementId
+ */
+{template .inputArea}
+    <form class="aui top-label">
+        <fieldset>
+            <div class="field-group">
+                <textarea id="{$inputElementId}.input" class="textarea full-width-field" name="comment" placeholder="Enter scenario steps here ..."></textarea>
+            </div>
+        </fieldset>
+    </form>
+{/template}

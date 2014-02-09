@@ -7,8 +7,6 @@ function EditStoryView(controller) {
     this.totalScenarios = 0;
     this.scenarioIndex = 0;
 
-    this.narrativePanelClass = "narrativePanel";
-
     this.init = function () {
 
         console.log("initializing EditStoryView");
@@ -39,8 +37,9 @@ function EditStoryView(controller) {
         // adds header for first page
         this.dialog.addHeader("Add New Story");
 
-        this.dialog.addPanel("Narrative: ", "Default content for panel.", this.narrativePanelClass);
-        AJS.$("." + this.narrativePanelClass).html(execspec.viewissuepage.editstory.narrative());
+        var narrativePanelClass = "narrativePanel";
+        this.dialog.addPanel("Narrative: ", "Default content for panel.", narrativePanelClass);
+        AJS.$("." + narrativePanelClass).html(execspec.viewissuepage.editstory.narrative());
 
 
         /*********************************************************************************
@@ -94,13 +93,9 @@ function EditStoryView(controller) {
 
         this.scenarioIndex += 1;
 
-        var elementId = "scenario" + this.scenarioIndex + "content";
         var panelClass = "scenarioPanel" + this.scenarioIndex;
         this.dialog.addPanel("Scenario " + this.scenarioIndex + ":", "Default content for panel", panelClass);
-        var tpParams = {
-            "inputElementId": panelClass + "content"
-        };
-        AJS.$("." + panelClass).html(execspec.viewissuepage.editstory.inputArea(tpParams));
+        AJS.$("." + panelClass).html(execspec.viewissuepage.editstory.scenarioInput());
 
         this.totalScenarios += 1;
     };
@@ -142,6 +137,16 @@ function EditStoryView(controller) {
         var e = AJS.$("#inputNarrative");
         var narrativeVal = e.val();
         return narrativeVal;
+    }
+
+    this.getScenarios = function () {
+        var scenariosArray = new Array();
+        AJS.$(".scenario-input").each(function () {
+            var scenarioModel = new ScenarioModel();
+            scenarioModel.text = this.value;
+            scenariosArray.push(scenarioModel);
+        });
+        return scenariosArray;
     }
 }
 

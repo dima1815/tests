@@ -15,13 +15,13 @@
 
 /**
  * Renders an input textarea for the edit/add story dialog
- * @param inputElementId
  */
-{template .inputArea}
+{template .scenarioInput}
     <form class="aui top-label" style="height:100%">
         <fieldset style="height:100%">
             <div class="field-group" style="height:100%">
-                <textarea style="height:100%" id="{$inputElementId}.input" class="textarea full-width-field" name="comment" placeholder="Enter scenario steps here ..."></textarea>
+                <textarea style="height:100%" class="textarea full-width-field scenario-input"
+                            name="comment" placeholder="Enter scenario steps here ..."></textarea>
             </div>
         </fieldset>
     </form>

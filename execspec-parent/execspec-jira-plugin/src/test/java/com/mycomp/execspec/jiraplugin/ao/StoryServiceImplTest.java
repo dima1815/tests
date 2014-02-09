@@ -2,7 +2,7 @@ package com.mycomp.execspec.jiraplugin.ao;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.activeobjects.test.TestActiveObjects;
-import com.mycomp.execspec.common.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.StoryModel;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 import junit.framework.Assert;
 import net.java.ao.EntityManager;
@@ -46,20 +46,21 @@ public class StoryServiceImplTest {
 
         List<StoryModel> all = storyService.all();
         Assert.assertEquals(2, all.size());
-        Assert.assertEquals(1, all.get(0).getId());
+        StoryModel storyModel = all.get(0);
+        Assert.assertEquals(new Integer(1), storyModel.getId());
 
     }
 
     public static class StoryServiceImplTestDatabaseUpdater implements DatabaseUpdater {
         @Override
         public void update(EntityManager em) throws Exception {
-            em.migrate(StoryAO.class);
+            em.migrate(Story.class);
 
-            final StoryAO story = em.create(StoryAO.class);
+            final Story story = em.create(Story.class);
             story.setNarrative("Story description");
             story.save();
 
-            final StoryAO story2 = em.create(StoryAO.class);
+            final Story story2 = em.create(Story.class);
             story2.setNarrative("Story description 2");
             story2.save();
         }

@@ -1,19 +1,46 @@
 package com.mycomp.execspec.jiraplugin.ao;
 
+import com.atlassian.activeobjects.external.ActiveObjects;
+import net.java.ao.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public interface StoryDao {
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.Lists.newArrayList;
 
-    StoryAO create();
+public final class StoryDao {
 
-    StoryAO read(int storyId);
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-    void delete(StoryAO story);
+    private final ActiveObjects ao;
 
-    List<StoryAO> findAll();
+    public StoryDao(ActiveObjects ao) {
+        this.ao = checkNotNull(ao);
+    }
 
-    List<StoryAO> findByIssueKey(String issueKey);
+    public Story create() {
+        final Story story = ao.create(Story.class);
+        return story;
+    }
+
+    public void delete(Story story) {
+        ao.delete(story);
+    }
+
+    public Story get(Integer id) {
+        return ao.get(Story.class, id);
+    }
+
+    public List<Story> findAll() {
+        return newArrayList(ao.find(Story.class));
+    }
+
+    public List<Story> findByIssueKey(String issueKey) {
+        String params = issueKey;
+        Query query = Query.select().where("ISSUE_KEY = ?", params);
+        Story[] result = ao.find(Story.class, query);
+        return newArrayList(result);
+    }
 }
-
-

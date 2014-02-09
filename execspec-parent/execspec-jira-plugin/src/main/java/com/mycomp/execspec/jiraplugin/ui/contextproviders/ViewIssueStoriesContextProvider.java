@@ -4,7 +4,7 @@ import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.plugin.webfragment.contextproviders.AbstractJiraContextProvider;
 import com.atlassian.jira.plugin.webfragment.model.JiraHelper;
-import com.mycomp.execspec.common.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.StoryModel;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 
 import java.sql.Timestamp;

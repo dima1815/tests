@@ -1,33 +1,96 @@
-<div class="field-ignore-highlight editable-field active" id="description-val">
-    <form action="#" class="ajs-dirty-warning-exempt aui" id="description-form">
-        <div class="inline-edit-fields" tabindex="1">
-            <div class="field-group">
-
-
-                <div class="wiki-edit">
-                    <div style="height: 300px; display: none;">&nbsp;</div>
-                    <div class="wiki-edit-content previewClass" id="description-wiki-edit">
-                        <textarea data-issuekey="TESTING-1" data-projectkey="TESTING" wrap="virtual" rows="12"
-                                  name="description" id="description"
-                                  class="textarea long-field wiki-textfield long-field mentionable"
-                                  style="height: 60px; overflow: hidden; display: none;">{color:red}asdf
-                            2222{color}</textarea>
-
-                        <div class="content-inner" style="max-height: none;"><p><font color="red">asdf 2222</font></p>
-                        </div>
-                    </div>
-                </div>
-
-
+<div class="aui-popup aui-dialog" id="editStoryDialog"
+     style="margin-top: -250px; margin-left: -480px; width: 960px; height: 500px; z-index: 3002; display: block;">
+    <div class="dialog-components" style="display: block;"><h2 class="dialog-title">Add New Story</h2>
+        <ul class="dialog-page-menu" style="height: 393px;">
+            <li class="page-menu-item">
+                <button class="item-button">Narrative:</button>
+            </li>
+            <li class="page-menu-item">
+                <button class="item-button">Scenario 1:</button>
+            </li>
+            <li class="page-menu-item">
+                <button class="item-button">Scenario 2:</button>
+            </li>
+            <li class="page-menu-item">
+                <button class="item-button">Scenario 3:</button>
+            </li>
+            <li class="page-menu-item">
+                <button class="item-button">Scenario 4:</button>
+            </li>
+            <li class="page-menu-item selected">
+                <button class="item-button">Scenario 5:</button>
+            </li>
+        </ul>
+        <div class="dialog-page-body">
+            <div class="dialog-panel-body narrativePanel" style="height: 393px; display: none;">
+                <form action="#" onsubmit="alert('in form submit'); return false;" class="aui top-label"
+                      style="height:100%" id="inputFormNarrative">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea placeholder="Story narrative here..."
+                                                                               name="comment" style="height:100%"
+                                                                               class="textarea full-width-field"
+                                                                               id="inputNarrative"></textarea></div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="dialog-panel-body scenarioPanel1" style="height: 393px; display: none;">
+                <form style="height:100%" class="aui top-label">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea
+                                placeholder="Enter scenario steps here ..." name="comment"
+                                class="textarea full-width-field" id="scenarioPanel1content.input"
+                                style="height:100%"></textarea></div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="dialog-panel-body scenarioPanel2" style="height: 393px; display: none;">
+                <form style="height:100%" class="aui top-label">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea
+                                placeholder="Enter scenario steps here ..." name="comment"
+                                class="textarea full-width-field" id="scenarioPanel2content.input"
+                                style="height:100%"></textarea></div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="dialog-panel-body scenarioPanel3" style="height: 393px; display: none;">
+                <form style="height:100%" class="aui top-label">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea
+                                placeholder="Enter scenario steps here ..." name="comment"
+                                class="textarea full-width-field" id="scenarioPanel3content.input"
+                                style="height:100%"></textarea></div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="dialog-panel-body scenarioPanel4" style="height: 393px; display: none;">
+                <form style="height:100%" class="aui top-label">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea
+                                placeholder="Enter scenario steps here ..." name="comment"
+                                class="textarea full-width-field" id="scenarioPanel4content.input"
+                                style="height:100%"></textarea></div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="dialog-panel-body scenarioPanel5" style="height: 393px;">
+                <form style="height:100%" class="aui top-label">
+                    <fieldset style="height:100%">
+                        <div style="height:100%" class="field-group"><textarea
+                                placeholder="Enter scenario steps here ..." name="comment"
+                                class="textarea full-width-field" id="scenarioPanel5content.input"
+                                style="height:100%"></textarea></div>
+                    </fieldset>
+                </form>
             </div>
         </div>
-        <span class="overlay-icon throbber"></span>
-
-        <div class="save-options" tabindex="1">
-            <button title="Press Alt+s to submit this form" accesskey="s" class="aui-button submit" type="submit"><span
-                    class="icon icon-save">Save</span></button>
-            <button title="Press Alt+` to cancel" accesskey="`" class="aui-button cancel" type="cancel"><span
-                    class="icon icon-cancel">Cancel</span></button>
-        </div>
-    </form>
+        <div class="dialog-button-panel">
+            <button class="button-panel-button">Add</button>
+            <button class="button-panel-button">Remove</button>
+            <button class="button-panel-button">Up</button>
+            <button class="button-panel-button">Down</button>
+            <button class="button-panel-button">Edit</button>
+            <button class="button-panel-button">Save</button>
+            <a href="#" class="button-panel-link #">Cancel</a></div>
+    </div>
 </div>

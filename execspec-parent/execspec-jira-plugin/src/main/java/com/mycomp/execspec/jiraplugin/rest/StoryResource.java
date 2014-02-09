@@ -1,14 +1,18 @@
 package com.mycomp.execspec.jiraplugin.rest;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
-import com.mycomp.execspec.common.dto.StoriesPayload;
-import com.mycomp.execspec.common.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.StoriesPayload;
+import com.mycomp.execspec.jiraplugin.dto.StoryModel;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 import org.apache.commons.lang.Validate;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,6 +24,7 @@ import java.util.List;
 @Path("/story")
 public class StoryResource {
 
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final StoryService storyService;
 
@@ -39,9 +44,9 @@ public class StoryResource {
 
     @GET
     @AnonymousAllowed
-    @Path("/list-for-issue/{issueKey}")
+    @Path("/find-for-issue/{issueKey}")
     @Produces(MediaType.APPLICATION_JSON)
-    public StoriesPayload listForIssue(@PathParam("issueKey") String issueKey) {
+    public StoriesPayload findForIssue(@PathParam("issueKey") String issueKey) {
 
         List<StoryModel> byIssueKey = storyService.findByIssueKey(issueKey);
         StoriesPayload payload = new StoriesPayload(byIssueKey);
@@ -67,7 +72,16 @@ public class StoryResource {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public StoryModel add(StoryModel storyModel) {
+//    public StoryModel add(String storyModelString) {
+    public StoryModel add(String storyModelString) {
+        ObjectMapper mapper = new ObjectMapper();
+        StoryModel storyModel = null;
+        try {
+            storyModel = mapper.readValue(storyModelString, StoryModel.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        log.debug("adding storyModel: \n" + storyModel);
         Validate.notNull(storyModel);
         Validate.notNull(storyModel.getIssueKey());
         Validate.notEmpty(storyModel.getNarrative(), "story narrative parameter was empty");

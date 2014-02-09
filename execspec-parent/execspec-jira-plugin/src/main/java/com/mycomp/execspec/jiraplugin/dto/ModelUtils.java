@@ -1,6 +1,6 @@
-package com.mycomp.execspec.common.dto;
+package com.mycomp.execspec.jiraplugin.dto;
 
-import com.mycomp.execspec.common.domain.Story;
+import com.mycomp.execspec.jiraplugin.ao.Story;
 
 import java.util.ArrayList;
 import java.util.List;

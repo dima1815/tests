@@ -1,4 +1,4 @@
-package com.mycomp.execspec.common.dto;
+package com.mycomp.execspec.jiraplugin.dto;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

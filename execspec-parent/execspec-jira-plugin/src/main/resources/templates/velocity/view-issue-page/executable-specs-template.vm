@@ -6,14 +6,8 @@
     </button>
 
     <div>
-        <br/>Other tests<br/>
-
-        <div id="main-container" class="aui-panel">
-            Here should be inserted the soy template stuff
-        </div>
-
-        <div id="add-new-story-container" class="aui-panel">
-            Here should be inserted the soy template for add new story
+        <div id="stories-container" class="aui-panel">
+        Here should be inserted the soy template stuff
         </div>
 
     </div>

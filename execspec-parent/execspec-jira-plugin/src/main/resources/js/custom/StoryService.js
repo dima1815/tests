@@ -1,5 +1,7 @@
 function StoryService() {
 
+    var baseUrl = "http://ideapad:2990/jira/rest/story-res/1.0/story";
+
     this.init = function () {
 
         console.log("initializing StoryService");
@@ -9,9 +11,7 @@ function StoryService() {
 
         console.log("Saving story via ajax, storyModel =\n" + storyModel);
 
-        var urlString = "http://ideapad:2990/jira/rest/story-res/1.0/story/add";
-//        var url = "http://ideapad:2990/jira/rest/story-res/1.0/story/delete/1";
-//        url = "http://ideapad:2990/jira/rest/story-res/1.0/story/list-for-issue/" + issueKey;
+        var urlString = baseUrl + "/add";
 
         var successFunction = new function (data) {
             console.log("Request submitted successfully, receivedData: \n" + data);
@@ -35,7 +35,7 @@ function StoryService() {
     this.findForIssue = function (issueKey, callBack) {
 
         console.log("Finding story for issue key = " + issueKey);
-        var urlString = "http://ideapad:2990/jira/rest/story-res/1.0/story/find-for-issue/" + issueKey;
+        var urlString = baseUrl + "/find-for-issue/" + issueKey;
 
         var jqxhr = AJS.$.getJSON(urlString);
         jqxhr.done(callBack);
@@ -48,7 +48,21 @@ function StoryService() {
     }
 
     this.deleteStory = function (storyId) {
+
         console.log("calling delete story with id - " + storyId);
+
+        var urlString = baseUrl + "/delete/" + storyId;
+
+        var callBack = function () {
+            console.log("Story with id - " + storyId + " deleted successfully");
+        };
+
+        AJS.$.ajax({
+            type: "DELETE",
+            url: urlString,
+            success: callBack
+        });
+
     }
 
 

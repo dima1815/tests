@@ -67,20 +67,21 @@ public class StoryModel {
         this.narrative = narrative;
     }
 
-    @Override
-    public String toString() {
-        return "StoryModel{" +
-                "issueKey='" + issueKey + '\'' +
-                ", id=" + id +
-                ", narrative='" + narrative + '\'' +
-                '}';
-    }
-
     public List<ScenarioModel> getScenarios() {
         return scenarios;
     }
 
     public void setScenarios(List<ScenarioModel> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    @Override
+    public String toString() {
+        return "StoryModel{" +
+                "id=" + id +
+                ", issueKey='" + issueKey + '\'' +
+                ", narrative='" + narrative + '\'' +
+                ", scenarios=" + scenarios +
+                '}';
     }
 }

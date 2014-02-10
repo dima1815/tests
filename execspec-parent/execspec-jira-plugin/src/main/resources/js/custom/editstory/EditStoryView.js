@@ -136,6 +136,10 @@ function EditStoryView(controller) {
     this.getNarrative = function () {
         var e = AJS.$("#inputNarrative");
         var narrativeVal = e.val();
+        // escape line breaks
+        console.log("escaping line breaks in:\n" + narrativeVal);
+//        narrativeVal = narrativeVal.replace(/\r?\n/g, '<br />');
+        console.log("after escaping:\n" + narrativeVal);
         return narrativeVal;
     }
 
@@ -143,7 +147,13 @@ function EditStoryView(controller) {
         var scenariosArray = new Array();
         AJS.$(".scenario-input").each(function () {
             var scenarioModel = new ScenarioModel();
-            scenarioModel.text = this.value;
+            var scenarioText = this.value;
+
+            console.log("escaping line breaks in:\n" + scenarioText);
+            scenarioText = scenarioText.replace(/\r?\n/g, '\n');
+            console.log("after escaping:\n" + scenarioText);
+
+            scenarioModel.text = scenarioText;
             scenariosArray.push(scenarioModel);
         });
         return scenariosArray;

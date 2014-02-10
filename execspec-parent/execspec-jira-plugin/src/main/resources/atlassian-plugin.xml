@@ -23,14 +23,18 @@
         <!--edit story-->
         <resource type="download" name="EditStoryController.js" location="/js/custom/editstory/EditStoryController.js"/>
         <resource type="download" name="EditStoryView.js" location="/js/custom/editstory/EditStoryView.js"/>
-        <resource type="download" name="EditStory.soy.js" location="js/custom/editstory/EditStory.soy"/>
+        <resource type="download" name="EditStoryTemplates.soy.js"
+                  location="js/custom/editstory/EditStoryTemplates.soy"/>
+        <!--delete story-->
+        <resource type="download" name="DeleteStoryController.js"
+                  location="/js/custom/deletestory/DeleteStoryController.js"/>
         <!--issue stories-->
-        <resource type="download" name="ViewIssueStories.soy.js"
-                  location="/js/custom/issuestories/ViewIssueStories.soy"/>
-        <resource type="download" name="IssueStoriesController.js"
-                  location="/js/custom/issuestories/IssueStoriesController.js"/>
-        <resource type="download" name="IssueStoriesModel.js" location="/js/custom/issuestories/IssueStoriesModel.js"/>
-        <resource type="download" name="IssueStoriesView.js" location="/js/custom/issuestories/IssueStoriesView.js"/>
+        <resource type="download" name="ShowStoryTemplates.soy.js"
+                  location="/js/custom/showstory/ShowStoryTemplates.soy"/>
+        <resource type="download" name="ShowStoryController.js"
+                  location="/js/custom/showstory/ShowStoryController.js"/>
+        <resource type="download" name="ShowStoryModel.js" location="/js/custom/showstory/ShowStoryModel.js"/>
+        <resource type="download" name="ShowStoryView.js" location="/js/custom/showstory/ShowStoryView.js"/>
         <!-- CSS -->
         <resource type="download" name="custom-style.css" location="css/custom-style.css">
             <param name="content-type" value="text/css"/>
@@ -48,14 +52,18 @@
     <!-- ==================================================================================================== -->
     <!-- View Issue page -->
     <!-- ==================================================================================================== -->
-
     <resource type="i18n" name="story-dialog" location="i18n/story-dialog"/>
     <resource type="i18n" name="exec-spec-panel" location="i18n/exec-spec-panel"/>
 
-    <!-- tool bar button to Add New Story -->
-    <web-item name="Schedule Web Item" i18n-name-key="schedule-web-item.name" key="schedule-web-item"
-              section="operations-top-level" weight="3">
-        <description key="schedule-web-item.description">The Schedule Web Item Plugin</description>
+    <!-- ==================================================================================================== -->
+    <!-- tool bar links -->
+    <!-- ==================================================================================================== -->
+    <web-section key="jbehave-story-section" name="JBehave Story" location="opsbar-operations" weight="20">
+        <label key="jbehave.story.section.label"/>
+    </web-section>
+    <web-item name="Create Story Item" i18n-name-key="create-story-web-item.name" key="create-story-web-item"
+              section="jbehave-story-section" weight="10">
+        <description key="create-story-web-item.description">The Create Story Web Item</description>
         <conditions type="and">
             <condition class="com.atlassian.jira.plugin.webfragment.conditions.IsIssueEditableCondition"/>
             <condition class="com.atlassian.jira.plugin.webfragment.conditions.HasIssuePermissionCondition">
@@ -66,11 +74,27 @@
             </condition>
         </conditions>
         <label key="addNewStoryButton.label"/>
-        <link linkId="add-new-story-web-item-link">/secure/AddWebworkModuleAction!default.jspa?id=${issueId}</link>
+        <link linkId="add-new-story-web-item-link">/#</link>
         <styleClass>add-new-story-button</styleClass>
     </web-item>
+    <web-item name="Edit Story Item" i18n-name-key="edit-story-web-item.name" key="edit-story-web-item"
+              section="jbehave-story-section" weight="20">
+        <description key="edit-story-web-item.description">The Edit Story Web Item</description>
+        <label key="editStoryButton.label"/>
+        <link linkId="edit-story-web-item-link">/#</link>
+        <styleClass>edit-story-button</styleClass>
+    </web-item>
+    <web-item name="Delete Story Item" i18n-name-key="delete-story-web-item.name" key="delete-story-web-item"
+              section="jbehave-story-section" weight="30">
+        <description key="delete-story-web-item.description">The Delete Story Web Item</description>
+        <label key="deleteStoryButton.label"/>
+        <link linkId="delete-story-web-item-link">/#</link>
+        <styleClass>delete-story-button</styleClass>
+    </web-item>
 
+    <!-- ==================================================================================================== -->
     <!-- stories panel -->
+    <!-- ==================================================================================================== -->
     <web-panel name="Executable Stories" i18n-name-key="acceptancetests-panel.name"
                key="acceptancetests-panel" location="atl.jira.view.issue.left.context" weight="211">
         <description key="acceptancetests-panel.description">Excecutable Stories</description>

@@ -84,10 +84,16 @@ public final class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public List<StoryModel> findByIssueKey(String issueKey) {
+    public StoryModel findByIssueKey(String issueKey) {
         List<Story> byIssueKey = storyDao.findByIssueKey(issueKey);
-        List<StoryModel> storyModels = ModelUtils.toModels(byIssueKey);
-        return storyModels;
+        if (byIssueKey.isEmpty()) {
+            return null;
+        } else if (byIssueKey.size() > 1) {
+            throw new RuntimeException("More than one story was found for issue key - " + issueKey);
+        } else {
+            StoryModel storyModel = new StoryModel(byIssueKey.get(0));
+            return storyModel;
+        }
     }
 
     @Override
@@ -104,6 +110,10 @@ public final class StoryServiceImpl implements StoryService {
     @Override
     public void delete(Long storyId) {
         Story story = storyDao.get(storyId.intValue());
+        Scenario[] scenarios = story.getScenarios();
+        for (Scenario scenario : scenarios) {
+            scenarioDao.delete(scenario);
+        }
         storyDao.delete(story);
     }
 }

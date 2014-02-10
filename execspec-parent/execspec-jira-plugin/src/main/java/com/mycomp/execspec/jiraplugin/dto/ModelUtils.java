@@ -13,21 +13,16 @@ import java.util.List;
  */
 public class ModelUtils {
 
-    public static StoriesPayload toStoriesPayload(List<? extends Story> stories) {
-
-        List<StoryModel> storyModels = toModels(stories);
-        StoriesPayload storiesPayload = new StoriesPayload(storyModels);
-        return storiesPayload;
-    }
-
     public static List<StoryModel> toModels(List<? extends Story> stories) {
 
         List<StoryModel> storyModels = new ArrayList<StoryModel>(stories.size());
         for (Story story : stories) {
+
             StoryModel storyModel = new StoryModel(story);
             storyModels.add(storyModel);
         }
 
         return storyModels;
     }
+
 }

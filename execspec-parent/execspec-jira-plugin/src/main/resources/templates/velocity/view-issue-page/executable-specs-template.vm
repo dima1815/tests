@@ -1,15 +1,5 @@
 <div id="storiesPanelMain">
 
-    <button id="addNewStoryButton" class="aui-button aui-button-subtle">
-        <span class="aui-icon aui-icon-small aui-iconfont-add">Configure </span>
-        Add new story
-    </button>
-
-    <div>
-        <div id="stories-container" class="aui-panel">
-        Here should be inserted the soy template stuff
-        </div>
-
-    </div>
+    <div id="story-container"></div>
 
 </div>

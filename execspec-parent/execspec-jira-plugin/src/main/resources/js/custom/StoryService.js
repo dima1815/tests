@@ -32,9 +32,9 @@ function StoryService() {
 
     }
 
-    this.findAllForIssue = function (issueKey, callBack) {
+    this.findForIssue = function (issueKey, callBack) {
 
-        console.log("Finding all stories for issue key = " + issueKey);
+        console.log("Finding story for issue key = " + issueKey);
         var urlString = "http://ideapad:2990/jira/rest/story-res/1.0/story/find-for-issue/" + issueKey;
 
         var jqxhr = AJS.$.getJSON(urlString);
@@ -45,6 +45,10 @@ function StoryService() {
         jqxhr.always(function () {
             console.log("ajax request completed successfully");
         });
+    }
+
+    this.deleteStory = function (storyId) {
+        console.log("calling delete story with id - " + storyId);
     }
 
 

@@ -1,0 +1,27 @@
+{namespace execspec.viewissuepage.showstory}
+
+/**
+ * Renders issue's story.
+ * @param story
+ */
+{template .renderStory}
+    <div>
+        <div class="story-container">
+            <div id="story-id-container" storyId="{$story.id}">
+                Story: {$story.id}
+            </div>
+            <div style="padding: 10px;">
+                {$story.narrative}
+            </div>
+            <div>
+                {foreach $scenario in $story.scenarios}
+                    <div style="border: 1px;">
+                        Scenario id - {$scenario.id}
+                        <br/>
+                        {$scenario.text}
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+{/template}

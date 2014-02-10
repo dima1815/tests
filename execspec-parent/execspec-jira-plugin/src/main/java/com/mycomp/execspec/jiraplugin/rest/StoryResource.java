@@ -3,6 +3,7 @@ package com.mycomp.execspec.jiraplugin.rest;
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 import com.mycomp.execspec.jiraplugin.dto.StoriesPayload;
 import com.mycomp.execspec.jiraplugin.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.StoryPayload;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 import org.apache.commons.lang.Validate;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -46,10 +47,10 @@ public class StoryResource {
     @AnonymousAllowed
     @Path("/find-for-issue/{issueKey}")
     @Produces(MediaType.APPLICATION_JSON)
-    public StoriesPayload findForIssue(@PathParam("issueKey") String issueKey) {
+    public StoryPayload findForIssue(@PathParam("issueKey") String issueKey) {
 
-        List<StoryModel> byIssueKey = storyService.findByIssueKey(issueKey);
-        StoriesPayload payload = new StoriesPayload(byIssueKey);
+        StoryModel byIssueKey = storyService.findByIssueKey(issueKey);
+        StoryPayload payload = new StoryPayload(byIssueKey);
         return payload;
     }
 

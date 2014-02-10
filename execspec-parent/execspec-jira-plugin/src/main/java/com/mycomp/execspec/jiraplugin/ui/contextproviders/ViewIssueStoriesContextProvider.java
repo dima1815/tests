@@ -9,7 +9,6 @@ import com.mycomp.execspec.jiraplugin.service.StoryService;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ViewIssueStoriesContextProvider extends AbstractJiraContextProvider {
@@ -39,9 +38,8 @@ public class ViewIssueStoriesContextProvider extends AbstractJiraContextProvider
 
 
         String issueKey = currentIssue.getKey();
-        List<StoryModel> storyModels = storyService.findByIssueKey(issueKey);
-        contextMap.put("totalStories", storyModels.size());
-        contextMap.put("stories", storyModels);
+        StoryModel storyModel = storyService.findByIssueKey(issueKey);
+        contextMap.put("story", storyModel);
 
         return contextMap;
     }

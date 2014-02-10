@@ -16,7 +16,7 @@ public interface StoryService {
 
     List<StoryModel> all();
 
-    List<StoryModel> findByIssueKey(String issueKey);
+    StoryModel findByIssueKey(String issueKey);
 
     StoryModel findById(Long storyId);
 

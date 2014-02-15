@@ -37,6 +37,8 @@ function EditStoryController() {
         model.issueKey = issueKey;
 
         this.storyService.createNewStory(model);
+
+        this.view.hideDialog();
     }
 
 }

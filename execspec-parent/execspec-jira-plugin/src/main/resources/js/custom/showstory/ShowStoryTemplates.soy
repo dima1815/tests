@@ -11,14 +11,14 @@
                 Story: {$story.id}
             </div>
             <div style="padding: 10px;">
-                {$story.narrative}
+                {$story.narrative|changeNewlineToBr}
             </div>
             <div>
                 {foreach $scenario in $story.scenarios}
                     <div style="border: 1px;">
                         Scenario id - {$scenario.id}
                         <br/>
-                        {$scenario.text}
+                        {$scenario.text|changeNewlineToBr}
                     </div>
                 {/foreach}
             </div>

@@ -18,6 +18,10 @@ function EditStoryView(controller) {
         });
     }
 
+    this.hideDialog = function () {
+        this.dialog.hide();
+    }
+
     this.showDialog = function () {
 
         if (this.dialog !== undefined) {

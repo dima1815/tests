@@ -7,17 +7,15 @@
 {template .renderStory}
     <div>
         <div class="story-container">
-            <div id="story-id-container" storyId="{$story.id}">
-                Story: {$story.id}
-            </div>
-            <div style="padding: 10px;">
+            <div id="story-id-container" storyId="{$story.id}" style="padding: 10px;">
+                Narrative:<br/>
                 {$story.narrative|changeNewlineToBr}
             </div>
-            <div>
+            <div style="padding: 10px;">
                 {foreach $scenario in $story.scenarios}
                     <div style="border: 1px;">
-                        Scenario id - {$scenario.id}
-                        <br/>
+//                        Scenario id - {$scenario.id}
+//                        <br/>
                         {$scenario.text|changeNewlineToBr}
                     </div>
                 {/foreach}

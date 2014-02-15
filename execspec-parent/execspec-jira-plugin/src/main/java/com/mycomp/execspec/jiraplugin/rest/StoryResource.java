@@ -36,7 +36,7 @@ public class StoryResource {
     @GET
     @AnonymousAllowed
     @Path("/list-all")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public StoriesPayload listAll() {
         List<StoryModel> all = storyService.all();
         StoriesPayload payload = new StoriesPayload(all);

@@ -1,7 +1,5 @@
 package com.mycomp.execspec.jiraplugin.dto;
 
-import com.mycomp.execspec.jiraplugin.ao.Scenario;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -14,14 +12,6 @@ public class ScenarioModel {
     private Integer id;
 
     private String text;
-
-    protected ScenarioModel() {
-    }
-
-    public ScenarioModel(Scenario storyScenario) {
-        this.id = storyScenario.getID();
-        this.text = storyScenario.getText();
-    }
 
     public String getText() {
         return text;
@@ -37,5 +27,13 @@ public class ScenarioModel {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ScenarioModel{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

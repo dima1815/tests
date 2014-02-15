@@ -21,7 +21,6 @@
         <module>execspec-common</module>
         <module>execspec-jira-plugin</module>
         <module>execspec-maven-plugin</module>
-        <module>example-jbehave-project</module>
     </modules>
     <dependencyManagement>
         <dependencies>

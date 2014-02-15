@@ -1,13 +1,8 @@
 package com.mycomp.execspec.jiraplugin.dto;
 
-
-import com.mycomp.execspec.jiraplugin.ao.Scenario;
-import com.mycomp.execspec.jiraplugin.ao.Story;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,18 +24,6 @@ public class StoryModel {
     private List<ScenarioModel> scenarios;
 
     public StoryModel() {
-    }
-
-    public StoryModel(Story story) {
-        id = story.getID();
-        issueKey = story.getIssueKey();
-        narrative = story.getNarrative();
-        Scenario[] storyScenarios = story.getScenarios();
-        scenarios = new ArrayList<ScenarioModel>(storyScenarios.length);
-        for (Scenario storyScenario : storyScenarios) {
-            ScenarioModel sm = new ScenarioModel(storyScenario);
-            scenarios.add(sm);
-        }
     }
 
     public String getIssueKey() {

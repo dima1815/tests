@@ -91,7 +91,8 @@ public final class StoryServiceImpl implements StoryService {
         } else if (byIssueKey.size() > 1) {
             throw new RuntimeException("More than one story was found for issue key - " + issueKey);
         } else {
-            StoryModel storyModel = new StoryModel(byIssueKey.get(0));
+            Story story = byIssueKey.get(0);
+            StoryModel storyModel = ModelUtils.toModel(story);
             return storyModel;
         }
     }
@@ -103,7 +104,7 @@ public final class StoryServiceImpl implements StoryService {
             throw new RuntimeException("Story id value is greater than allowed");
         }
         Story story = storyDao.get(storyId.intValue());
-        StoryModel storyModel = new StoryModel(story);
+        StoryModel storyModel = ModelUtils.toModel(story);
         return storyModel;
     }
 

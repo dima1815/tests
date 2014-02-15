@@ -22,10 +22,9 @@ function EditStoryController() {
         var scenarios = this.view.getScenarios();
         console.log("Saving scenarios - " + scenarios);
 
-        var issueKey = "TESTING-1";
-        console.log("issueKey - " + this.utils.getIssueKey());
+        var issueKey = this.utils.getIssueKey();
+        console.log("issueKey - " + issueKey);
         var projectKey = this.utils.getProjectKey();
-//        var projectKey = "TESTING";
         console.log("projectKey - " + projectKey);
 
         var keyVal = AJS.$("#key-val").text();
@@ -39,6 +38,7 @@ function EditStoryController() {
         this.storyService.createNewStory(model);
 
         this.view.hideDialog();
+        ShowStoryController.init();
     }
 
 }

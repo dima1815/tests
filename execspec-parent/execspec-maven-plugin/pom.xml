@@ -10,12 +10,12 @@
     </parent>
     <groupId>com.mycomp.jira.execspec</groupId>
     <artifactId>execspec-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>execspec-maven-plugin</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <execspec.version>${project.version}</execspec.version>
     </properties>
     <build>
         <plugins>
@@ -44,8 +44,19 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.0.0.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>com.mycomp.jira.execspec</groupId>
             <artifactId>execspec-common</artifactId>
+            <version>${execspec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycomp.jira.execspec</groupId>
+            <artifactId>execspec-jira-plugin</artifactId>
+            <version>${execspec.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>

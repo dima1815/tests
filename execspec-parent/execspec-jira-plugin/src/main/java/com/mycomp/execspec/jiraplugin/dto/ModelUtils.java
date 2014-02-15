@@ -1,5 +1,6 @@
 package com.mycomp.execspec.jiraplugin.dto;
 
+import com.mycomp.execspec.jiraplugin.ao.Scenario;
 import com.mycomp.execspec.jiraplugin.ao.Story;
 
 import java.util.ArrayList;
@@ -18,11 +19,31 @@ public class ModelUtils {
         List<StoryModel> storyModels = new ArrayList<StoryModel>(stories.size());
         for (Story story : stories) {
 
-            StoryModel storyModel = new StoryModel(story);
+            StoryModel storyModel = toModel(story);
             storyModels.add(storyModel);
         }
 
         return storyModels;
+    }
+
+    public static StoryModel toModel(Story story) {
+
+        StoryModel storyModel = new StoryModel();
+        storyModel.setId(story.getID());
+        storyModel.setIssueKey(story.getIssueKey());
+        storyModel.setNarrative(story.getNarrative());
+
+        Scenario[] scenarios = story.getScenarios();
+        List<ScenarioModel> scenarioModels = new ArrayList<ScenarioModel>(scenarios.length);
+        for (Scenario scenario : scenarios) {
+            ScenarioModel scenarioModel = new ScenarioModel();
+            scenarioModel.setId(scenario.getID());
+            scenarioModel.setText(scenario.getText());
+            scenarioModels.add(scenarioModel);
+        }
+        storyModel.setScenarios(scenarioModels);
+
+        return storyModel;
     }
 
 }

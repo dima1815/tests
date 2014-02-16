@@ -1,0 +1,26 @@
+package org.jbehave.mojo;
+
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.jbehave.core.embedder.Embedder;
+import org.jbehave.core.failures.FailingUponPendingStep;
+
+/**
+ * Mojo to run stories as paths
+ *
+ * @goal run-stories-as-paths
+ */
+public class RunStoriesAsPaths extends AbstractEmbedderMojo {
+
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        Embedder embedder = newEmbedder();
+        embedder.configuration().useFailureStrategy(new FailingUponPendingStep());
+        getLog().info("Running stories as paths using embedder " + embedder);
+        try {
+            embedder.runStoriesAsPaths(storyPaths());
+        } catch (RuntimeException e) {
+            throw new MojoFailureException("Failed to run stories as paths", e);
+        }
+    }
+
+}

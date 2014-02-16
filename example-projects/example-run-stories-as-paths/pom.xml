@@ -8,9 +8,9 @@
         <artifactId>example-projects</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>example-run-stories-as-ebeddables</artifactId>
+    <artifactId>example-run-stories-as-paths</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>example-run-stories-as-ebeddables</name>
+    <name>example-run-stories-as-paths</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,57 +37,26 @@
             <plugin>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-maven-plugin</artifactId>
-                <version>3.8</version>
+                <!--<version>3.8</version>-->
+                <version>3.10-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>run-stories-in-test-scope</id>
                         <phase>integration-test</phase>
                         <configuration>
                             <includes>
-                                <include>**/*.java</include>
+                                <include>**/*.story</include>
                             </includes>
                             <scope>test</scope>
                             <ignoreFailureInStories>true</ignoreFailureInStories>
                             <ignoreFailureInView>false</ignoreFailureInView>
                         </configuration>
                         <goals>
-                            <goal>run-stories-as-embeddables</goal>
+                            <goal>run-stories-as-paths</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>-->
-            <!--<groupId>org.jbehave</groupId>-->
-            <!--<artifactId>jbehave-maven-plugin</artifactId>-->
-            <!--<version>3.8</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>run-stories-as-embeddables</id>-->
-            <!--<phase>test</phase>-->
-            <!--<configuration>-->
-            <!--<includes>-->
-            <!--<include>**/*Stories.java</include>-->
-            <!--</includes>-->
-            <!--<metaFilters>-->
-            <!--<metaFilter>+author *</metaFilter>-->
-            <!--<metaFilter>-skip</metaFilter>-->
-            <!--</metaFilters>-->
-            <!--<systemProperties>-->
-            <!--<property>-->
-            <!--<name>java.awt.headless</name>-->
-            <!--<value>true</value>-->
-            <!--</property>-->
-            <!--</systemProperties>-->
-            <!--<ignoreFailureInStories>true</ignoreFailureInStories>-->
-            <!--<ignoreFailureInView>false</ignoreFailureInView>-->
-            <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
-            <!--</configuration>-->
-            <!--<goals>-->
-            <!--<goal>run-stories-as-embeddables</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
     <dependencies>
@@ -99,7 +68,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

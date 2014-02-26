@@ -1,8 +1,19 @@
 package com.mycomp.execspec.jiraplugin.rest;
 
+import com.atlassian.crowd.embedded.api.User;
+import com.atlassian.jira.bc.issue.search.SearchService;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.search.SearchException;
+import com.atlassian.jira.issue.search.SearchResults;
+import com.atlassian.jira.jql.builder.JqlQueryBuilder;
+import com.atlassian.jira.security.JiraAuthenticationContext;
+import com.atlassian.jira.user.ApplicationUser;
+import com.atlassian.jira.web.bean.PagerFilter;
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
+import com.atlassian.query.Query;
 import com.mycomp.execspec.jiraplugin.dto.StoriesPayload;
 import com.mycomp.execspec.jiraplugin.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.StoryPathsModel;
 import com.mycomp.execspec.jiraplugin.dto.StoryPayload;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 import org.apache.commons.lang.Validate;
@@ -14,6 +25,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,8 +41,47 @@ public class StoryResource {
 
     private final StoryService storyService;
 
-    public StoryResource(StoryService storyService) {
+    private SearchService searchService;
+    private JiraAuthenticationContext authenticationContext;
+
+    public StoryResource(StoryService storyService, SearchService searchService, JiraAuthenticationContext authenticationContext) {
         this.storyService = storyService;
+        this.searchService = searchService;
+        this.authenticationContext = authenticationContext;
+    }
+
+    @GET
+    @AnonymousAllowed
+    @Path("/list-story-paths/{projectKey}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public StoryPathsModel listStoryPaths(@PathParam("projectKey") String projectKey) {
+
+        Validate.notEmpty(projectKey);
+
+        List<String> paths = new ArrayList<String>();
+
+        final JqlQueryBuilder builder = JqlQueryBuilder.newBuilder();
+        builder.where().project(projectKey);
+        //        .and().customField(10490L).eq("xss");
+        Query query = builder.buildQuery();
+        try {
+            ApplicationUser appUser = authenticationContext.getUser();
+            User directoryUser = appUser.getDirectoryUser();
+            final SearchResults results = searchService.search(directoryUser, query, PagerFilter.getUnlimitedFilter());
+            final List<Issue> issues = results.getIssues();
+            for (Issue issue : issues) {
+                String issueKey = issue.getKey();
+                String path = "rest/story-res/1.0/story/find/" + projectKey + "/" + issueKey;
+                paths.add(path);
+            }
+        } catch (SearchException e) {
+            log.error("Error running search", e);
+        }
+
+        StoryPathsModel pathsModel = new StoryPathsModel();
+        pathsModel.setPaths(paths);
+
+        return pathsModel;
     }
 
     @GET
@@ -45,11 +96,11 @@ public class StoryResource {
 
     @GET
     @AnonymousAllowed
-    @Path("/find-for-issue/{issueKey}")
+    @Path("/find/{projectKey}/{issueKey}")
     @Produces(MediaType.APPLICATION_JSON)
-    public StoryPayload findForIssue(@PathParam("issueKey") String issueKey) {
+    public StoryPayload findForIssue(@PathParam("projectKey") String projectKey, @PathParam("issueKey") String issueKey) {
 
-        StoryModel byIssueKey = storyService.findByIssueKey(issueKey);
+        StoryModel byIssueKey = storyService.findByProjectAndIssueKey(projectKey, issueKey);
         StoryPayload payload = new StoryPayload(byIssueKey);
         return payload;
     }
@@ -84,10 +135,11 @@ public class StoryResource {
         }
         log.debug("adding storyModel: \n" + storyModel);
         Validate.notNull(storyModel);
+        Validate.notNull(storyModel.getProjectKey());
         Validate.notNull(storyModel.getIssueKey());
         Validate.notEmpty(storyModel.getNarrative(), "story narrative parameter was empty");
         System.out.println("### in add method, storyModel - " + storyModel);
-        storyService.create(storyModel, storyModel.getIssueKey());
+        storyService.create(storyModel);
         return storyModel;
     }
 

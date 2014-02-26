@@ -31,6 +31,7 @@ public class ModelUtils {
         StoryModel storyModel = new StoryModel();
         storyModel.setId(story.getID());
         storyModel.setIssueKey(story.getIssueKey());
+        storyModel.setProjectKey(story.getProjectKey());
         storyModel.setNarrative(story.getNarrative());
 
         Scenario[] scenarios = story.getScenarios();
@@ -46,4 +47,23 @@ public class ModelUtils {
         return storyModel;
     }
 
+    public static String asTextStory(StoryModel storyModel) {
+
+        StringBuilder sb = new StringBuilder();
+        final String LINE_BREAK = "\n";
+
+        // narrative
+        sb.append("Narrative:");
+        sb.append(LINE_BREAK);
+        sb.append(storyModel.getNarrative());
+        sb.append(LINE_BREAK);
+
+        List<ScenarioModel> scenarios = storyModel.getScenarios();
+        for (ScenarioModel scenario : scenarios) {
+            sb.append(LINE_BREAK);
+            sb.append(scenario.getText());
+        }
+
+        return sb.toString();
+    }
 }

@@ -34,11 +34,11 @@ function EditStoryController() {
         model.narrative = narrative;
         model.scenarios = scenarios;
         model.issueKey = issueKey;
+        model.projectKey = projectKey;
 
         this.storyService.createNewStory(model);
 
         this.view.hideDialog();
-        ShowStoryController.init();
     }
 
 }

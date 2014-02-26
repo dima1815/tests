@@ -13,6 +13,11 @@ public interface Story extends Entity {
     void setIssueKey(String issueKey);
 
     //    @NotNull
+    String getProjectKey();
+
+    void setProjectKey(String projectKey);
+
+    //    @NotNull
     String getNarrative();
 
     void setNarrative(String narrative);
@@ -20,5 +25,4 @@ public interface Story extends Entity {
     @OneToMany
     Scenario[] getScenarios();
 
-//    void setScenarios(Scenario[] scenarios);
 }

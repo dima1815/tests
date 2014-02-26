@@ -8,15 +8,13 @@ import java.util.List;
 @Transactional
 public interface StoryService {
 
-    void create(StoryModel storyModel, long issueId);
-
-    void create(StoryModel storyModel, String issueKey);
+    void create(StoryModel storyModel);
 
     void update(StoryModel storyModel);
 
     List<StoryModel> all();
 
-    StoryModel findByIssueKey(String issueKey);
+    StoryModel findByProjectAndIssueKey(String projectKey, String issueKey);
 
     StoryModel findById(Long storyId);
 

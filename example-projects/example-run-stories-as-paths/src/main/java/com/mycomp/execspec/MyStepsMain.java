@@ -17,7 +17,8 @@ public class MyStepsMain {
 
     @Given("something")
     public void someStep() {
-        System.out.println("in something");
+        System.out.println("throwing exception from 'Given something'");
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Given("something else:$trades")

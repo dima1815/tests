@@ -19,6 +19,8 @@ public class StoryModel {
 
     private String issueKey;
 
+    private String projectKey;
+
     private String narrative;
 
     private List<ScenarioModel> scenarios;
@@ -56,6 +58,14 @@ public class StoryModel {
 
     public void setScenarios(List<ScenarioModel> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    public String getProjectKey() {
+        return projectKey;
+    }
+
+    public void setProjectKey(String projectKey) {
+        this.projectKey = projectKey;
     }
 
     @Override

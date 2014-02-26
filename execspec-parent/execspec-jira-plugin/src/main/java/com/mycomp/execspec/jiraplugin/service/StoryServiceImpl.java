@@ -32,15 +32,8 @@ public final class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public void create(StoryModel storyModel, long issueId) {
-        User user = authenticationContext.getLoggedInUser();
-        IssueService.IssueResult issue = is.getIssue(user, issueId);
-        Validate.notNull(issue, "Could not find issue for id - " + issueId);
-        createStory(storyModel, issue);
-    }
-
-    @Override
-    public void create(StoryModel storyModel, String issueKey) {
+    public void create(StoryModel storyModel) {
+        String issueKey = storyModel.getIssueKey();
         User user = authenticationContext.getLoggedInUser();
         IssueService.IssueResult issue = is.getIssue(user, issueKey);
         Validate.notNull(issue, "Could not find issue for key - " + issueKey);
@@ -53,7 +46,8 @@ public final class StoryServiceImpl implements StoryService {
 
         final Story story = storyDao.create();
         story.setNarrative(storyModel.getNarrative());
-        story.setIssueKey(issue.getIssue().getKey());
+        story.setIssueKey(storyModel.getIssueKey());
+        story.setProjectKey(storyModel.getProjectKey());
 
         story.save();
         storyModel.setId(story.getID());
@@ -84,8 +78,8 @@ public final class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public StoryModel findByIssueKey(String issueKey) {
-        List<Story> byIssueKey = storyDao.findByIssueKey(issueKey);
+    public StoryModel findByProjectAndIssueKey(String projectKey, String issueKey) {
+        List<Story> byIssueKey = storyDao.findByProjectAndIssueKey(projectKey, issueKey);
         if (byIssueKey.isEmpty()) {
             return null;
         } else if (byIssueKey.size() > 1) {

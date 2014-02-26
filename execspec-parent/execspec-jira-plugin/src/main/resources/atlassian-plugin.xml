@@ -98,10 +98,9 @@
     <web-panel name="Executable Stories" i18n-name-key="acceptancetests-panel.name"
                key="acceptancetests-panel" location="atl.jira.view.issue.left.context" weight="211">
         <description key="acceptancetests-panel.description">Excecutable Stories</description>
-        <resource name="view" type="velocity"
-                  location="templates/velocity/view-issue-page/executable-specs-template.vm"/>
+        <resource name="view" type="static"
+                  location="templates/static/stories_panel.html"/>
         <label key="acceptancetests-panel.title"/>
-        <context-provider class="com.mycomp.execspec.jiraplugin.ui.contextproviders.ViewIssueStoriesContextProvider"/>
     </web-panel>
 
 
@@ -121,6 +120,11 @@
         <entity>com.mycomp.execspec.jiraplugin.ao.Story</entity>
         <entity>com.mycomp.execspec.jiraplugin.ao.Scenario</entity>
     </ao>
+
+    <!-- ==================================================================================================== -->
+    <!--Other imported components-->
+    <!-- ==================================================================================================== -->
+    <component-import key="searchService" interface="com.atlassian.jira.bc.issue.search.SearchService"/>
 
     <!-- ==================================================================================================== -->
     <!-- Custom components -->

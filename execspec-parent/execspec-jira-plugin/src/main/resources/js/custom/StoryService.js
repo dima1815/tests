@@ -32,18 +32,18 @@ function StoryService() {
 
     }
 
-    this.findForIssue = function (issueKey, callBack) {
+    this.find = function (projectKey, issueKey, callBack) {
 
-        console.log("Finding story for issue key = " + issueKey);
-        var urlString = baseUrl + "/find-for-issue/" + issueKey;
+        console.log("Finding story for project key " + projectKey + " and issue key = " + issueKey);
+        var urlString = baseUrl + "/find/" + projectKey + "/" + issueKey;
 
         var jqxhr = AJS.$.getJSON(urlString);
         jqxhr.done(callBack);
         jqxhr.fail(function (json) {
             console.log("error occurred during ajax call - " + json);
         });
-        jqxhr.always(function () {
-            console.log("ajax request completed successfully");
+        jqxhr.always(function (json) {
+            console.log("ajax request completed successfully, json - " + json);
         });
     }
 

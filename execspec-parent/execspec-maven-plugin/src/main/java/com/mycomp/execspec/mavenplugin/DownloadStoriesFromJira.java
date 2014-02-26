@@ -40,22 +40,25 @@ public class DownloadStoriesFromJira extends AbstractMojo {
     @Parameter(property = GOAL + ".restApiBasePath", defaultValue = "/rest/story-res/1.0")
     private String restApiBasePath;
 
-    @Parameter(property = GOAL + ".listStoriesResourcePath", defaultValue = "/story/list-all")
-    private String listStoriesResourcePath;
+    @Parameter(property = GOAL + ".listStoryPaths", defaultValue = "/story/list-story-paths")
+    private String listStoryPaths;
+
+    @Parameter(property = GOAL + ".jiraProject")
+    private String jiraProject;
 
     @Parameter(property = GOAL + ".downloadedStoriesDir", defaultValue = "src/test/resources")
     private String downloadedStoriesDir;
 
     public void execute() throws MojoExecutionException {
 
-        String resourcePath = jiraUrl + restApiBasePath + listStoriesResourcePath;
+        String resourcePath = jiraUrl + restApiBasePath + listStoryPaths + "/" + jiraProject;
 
         getLog().info("resourcePath = " + resourcePath);
 
         Client client = Client.create();
         WebResource res = client.resource(resourcePath);
-//        res.type(MediaType.APPLICATION_JSON);
-        res.type(MediaType.TEXT_PLAIN);
+        res.type(MediaType.APPLICATION_JSON);
+//        res.type(MediaType.TEXT_PLAIN);
         ClientResponse response = res.get(ClientResponse.class);
         getLog().info("response - " + response);
         if (response.getStatus() == 200) {

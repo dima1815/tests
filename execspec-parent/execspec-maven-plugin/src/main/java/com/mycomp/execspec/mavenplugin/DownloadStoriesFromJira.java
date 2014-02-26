@@ -34,7 +34,7 @@ public class DownloadStoriesFromJira extends AbstractMojo {
 
     public static final String GOAL = "downloadstories";
 
-    @Parameter(property = GOAL + ".jiraUrl", defaultValue = "http://ideapad:2990/jira")
+    @Parameter(property = GOAL + ".jiraUrl", defaultValue = "http://localhost:2990/jira")
     private String jiraUrl;
 
     @Parameter(property = GOAL + ".restApiBasePath", defaultValue = "/rest/story-res/1.0")

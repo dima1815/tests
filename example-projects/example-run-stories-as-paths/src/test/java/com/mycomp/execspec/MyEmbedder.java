@@ -3,10 +3,13 @@ package com.mycomp.execspec;
 import org.jbehave.core.context.Context;
 import org.jbehave.core.context.ContextView;
 import org.jbehave.core.context.JFrameContextView;
+import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.*;
+import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
  */
 public class MyEmbedder extends JUnitStories {
 
-    private final String jiraBaseUrl = "http://ideapad:2990/jira";
+    private final String jiraBaseUrl = "http://localhost:2990/jira";
 
     public MyEmbedder() {
         Context context = new Context();
@@ -35,16 +38,37 @@ public class MyEmbedder extends JUnitStories {
         configuration().storyReporterBuilder().withCrossReference(crossReference);
 
         JiraStoryLoader jiraLoader = new JiraStoryLoader();
-        jiraLoader.setJiraBaseUrl(jiraBaseUrl);
+        jiraLoader.setJiraBaseUrl(jiraBaseUrl + "/rest/story-res/1.0/story/find");
         configuration().useStoryLoader(jiraLoader);
 
         StoryReporter jiraStoryReporter = new JiraStoryReporter();
-        configuration().useDefaultStoryReporter(jiraStoryReporter);
+        configuration().storyReporterBuilder().withReporters(jiraStoryReporter);
+
+        JiraStepDocReporter stepDocReporter = new JiraStepDocReporter();
+        configuration().useStepdocReporter(stepDocReporter);
+
+    }
+
+    @Test
+    public void run() throws Throwable {
+        Embedder embedder = configuredEmbedder();
+        try {
+            embedder.runStoriesAsPaths(storyPaths());
+        } finally {
+            embedder.generateCrossReference();
+
+            List<CandidateSteps> candidateSteps = embedder.stepsFactory().createCandidateSteps();
+            embedder.reportStepdocs(configuration(), candidateSteps);
+            embedder.reportStepdocs();
+            embedder.reportMatchingStepdocs("Given *");
+            embedder.reportMatchingStepdocs("When *");
+            embedder.reportMatchingStepdocs("Then *");
+        }
     }
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new MyStepsMain());
+        return new InstanceStepsFactory(configuration(), new MyStepsMain(), new MyStepsMain2());
     }
 
     @Override

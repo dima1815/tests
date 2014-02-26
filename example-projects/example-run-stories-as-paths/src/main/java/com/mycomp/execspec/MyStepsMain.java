@@ -2,6 +2,7 @@ package com.mycomp.execspec;
 
 import org.hamcrest.Matchers;
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Then;
 import org.jbehave.core.model.ExamplesTable;
 import org.jbehave.core.model.OutcomesTable;
 
@@ -20,6 +21,12 @@ public class MyStepsMain {
         System.out.println("throwing exception from 'Given something'");
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    @Then("something should happen")
+    public void verify() {
+        System.out.println("-> verify");
+    }
+
 
     @Given("something else:$trades")
     public void someOtherStep(ExamplesTable trades) {

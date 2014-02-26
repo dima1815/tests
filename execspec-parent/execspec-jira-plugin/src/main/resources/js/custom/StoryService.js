@@ -1,6 +1,6 @@
 function StoryService() {
 
-    var baseUrl = "http://ideapad:2990/jira/rest/story-res/1.0/story";
+    var baseUrl = "http://localhost:2990/jira/rest/story-res/1.0/story";
 
     this.init = function () {
 

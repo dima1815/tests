@@ -71,7 +71,7 @@ public class StoryResource {
             final List<Issue> issues = results.getIssues();
             for (Issue issue : issues) {
                 String issueKey = issue.getKey();
-                String path = "rest/story-res/1.0/story/find/" + projectKey + "/" + issueKey;
+                String path = projectKey + "/" + issueKey;
                 paths.add(path);
             }
         } catch (SearchException e) {

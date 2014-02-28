@@ -3,6 +3,9 @@
 }
 
 div.story-container {
-    background-color: #77cc77;
     border: 1px;
+}
+
+span.story-status-field {
+    color: darkred;
 }

@@ -2,10 +2,38 @@
     padding: 0px;
 }
 
-div.story-container {
+.story-container {
+    border-color: aquamarine;
     border: 1px;
+    font-family: "Lucida Grande", "Arial", "Helvetica", "Verdana", sans-serif;
+    color: #555;
+    text-align: left;
+    /*font-size: 0.84em;*/
+    font-size: 13px;
 }
 
-span.story-status-field {
-    color: darkred;
+.story {
+    font-size: 14px;
+}
+
+.narrative {
+    color: blue;
+}
+
+.narrative .label {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.narrative .element {
+    padding-left: 10px;
+}
+
+.narrative .element .keyword {
+    font-weight: bold;
 }

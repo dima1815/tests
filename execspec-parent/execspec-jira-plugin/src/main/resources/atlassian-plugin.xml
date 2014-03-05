@@ -41,8 +41,9 @@
     </web-resource>
     <!-- ==================================================================================================== -->
     <!--REST api-->
-    <rest name="Story Resource" i18n-name-key="story-resource.name" key="stories-res" path="/story-res" version="1.0">
-        <description key="story-resource.description">The story rest resource plugin</description>
+    <rest name="Story Resource" i18n-name-key="rest.storyResource.name" key="stories-res" path="/story-res"
+          version="1.0">
+        <description key="rest.storyResource.description">The story rest resource plugin</description>
     </rest>
     <!-- ==================================================================================================== -->
     <!--Localization-->
@@ -105,9 +106,9 @@
     </web-panel>
     <!-- ==================================================================================================== -->
     <!--Custom fields-->
-    <customfield-type name="Story Status Field" i18n-name-key="story-status-field.name" key="story-status-field"
+    <customfield-type name="Story Status Field" i18n-name-key="storySstatusField.name" key="story-status-field"
                       class="com.mycomp.execspec.jiraplugin.fields.StoryStatusField">
-        <description key="story-status-field.description">The Story Status Field Plugin</description>
+        <description key="storySstatusField.description">The Story Status Field Plugin</description>
         <resource name="view" type="velocity" location="/templates/customfields/storystatus/view.vm"/>
         <resource name="edit" type="velocity" location="/templates/customfields/storystatus/edit.vm"/>
     </customfield-type>

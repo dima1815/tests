@@ -1,4 +1,4 @@
-package com.mycomp.execspec.jiraplugin.dto;
+package com.mycomp.execspec.jiraplugin.dto.output;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,13 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class StoryPayload {
 
     @XmlElement
-    private StoryModel story;
-
-    /**
-     * Constructor for use via reflection.
-     */
-    protected StoryPayload() {
-    }
+    private final StoryModel story;
 
     public StoryPayload(StoryModel story) {
         this.story = story;

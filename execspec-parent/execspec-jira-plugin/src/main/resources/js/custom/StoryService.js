@@ -1,6 +1,6 @@
 function StoryService() {
 
-    var baseUrl = "http://localhost:2990/jira/rest/story-res/1.0/story";
+    var baseUrl = "http://localhost:2990/jira/rest/story-res/1.0/";
 
     this.init = function () {
 
@@ -11,7 +11,7 @@ function StoryService() {
 
         console.log("Saving story via ajax, storyModel =\n" + storyModel);
 
-        var urlString = baseUrl + "/add";
+        var urlString = baseUrl + "crud/create";
 
         var successFunction = new function (data) {
             console.log("Request submitted successfully, receivedData: \n" + data);
@@ -35,7 +35,7 @@ function StoryService() {
     this.find = function (projectKey, issueKey, callBack) {
 
         console.log("Finding story for project key " + projectKey + " and issue key = " + issueKey);
-        var urlString = baseUrl + "/find/" + projectKey + "/" + issueKey;
+        var urlString = baseUrl + "find/for-issue/" + projectKey + "/" + issueKey;
 
         var jqxhr = AJS.$.getJSON(urlString);
         jqxhr.done(callBack);

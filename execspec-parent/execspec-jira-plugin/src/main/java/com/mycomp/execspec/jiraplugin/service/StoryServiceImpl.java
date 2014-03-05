@@ -8,8 +8,8 @@ import com.mycomp.execspec.jiraplugin.ao.ScenarioDao;
 import com.mycomp.execspec.jiraplugin.ao.Story;
 import com.mycomp.execspec.jiraplugin.ao.StoryDao;
 import com.mycomp.execspec.jiraplugin.dto.ModelUtils;
-import com.mycomp.execspec.jiraplugin.dto.ScenarioModel;
-import com.mycomp.execspec.jiraplugin.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.input.SaveStoryModel;
+import com.mycomp.execspec.jiraplugin.dto.output.StoryModel;
 import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public final class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public void create(StoryModel storyModel) {
+    public void create(SaveStoryModel storyModel) {
         String issueKey = storyModel.getIssueKey();
         User user = authenticationContext.getLoggedInUser();
         IssueService.IssueResult issue = is.getIssue(user, issueKey);
@@ -40,7 +40,7 @@ public final class StoryServiceImpl implements StoryService {
         this.createStory(storyModel, issue);
     }
 
-    private void createStory(StoryModel storyModel, IssueService.IssueResult issue) {
+    private void createStory(SaveStoryModel storyModel, IssueService.IssueResult issue) {
         log.debug("$$$ Found issue is - " + issue);
         log.debug("$$$ Found issue key is - " + issue.getIssue().getKey());
 
@@ -50,24 +50,23 @@ public final class StoryServiceImpl implements StoryService {
         story.setProjectKey(storyModel.getProjectKey());
 
         story.save();
-        storyModel.setId(story.getID());
 
         // save the scenarios too
-        List<ScenarioModel> scenarioModels = storyModel.getScenarios();
-        for (ScenarioModel scenarioModel : scenarioModels) {
+        List<String> scenarios = storyModel.getScenarios();
+        for (String strScenario : scenarios) {
             Scenario scenario = scenarioDao.create();
-            scenario.setText(scenarioModel.getText());
+            scenario.setText(strScenario);
             scenario.setStory(story);
             scenario.save();
-            scenarioModel.setId(scenario.getID());
         }
     }
 
     @Override
-    public void update(StoryModel storyModel) {
-        Story story = storyDao.get(storyModel.getId());
-        story.setNarrative(storyModel.getNarrative());
-        story.save();
+    public void update(SaveStoryModel storyModel) {
+        throw new UnsupportedOperationException("Not yet implemented");
+//        Story story = storyDao.get(storyModel.getId());
+//        story.setNarrative(storyModel.getNarrative().getText());
+//        story.save();
     }
 
     @Override
@@ -105,6 +104,18 @@ public final class StoryServiceImpl implements StoryService {
     @Override
     public void delete(Long storyId) {
         Story story = storyDao.get(storyId.intValue());
+        deleteStory(story);
+    }
+
+    @Override
+    public void delete(String projectKey, String issueKey) {
+        List<Story> stories = storyDao.findByProjectAndIssueKey(projectKey, issueKey);
+        Validate.isTrue(stories.size() == 1);
+        Story story = stories.get(0);
+        deleteStory(story);
+    }
+
+    private void deleteStory(Story story) {
         Scenario[] scenarios = story.getScenarios();
         for (Scenario scenario : scenarios) {
             scenarioDao.delete(scenario);

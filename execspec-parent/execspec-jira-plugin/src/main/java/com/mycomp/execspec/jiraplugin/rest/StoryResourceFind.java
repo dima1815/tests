@@ -11,20 +11,20 @@ import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.bean.PagerFilter;
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 import com.atlassian.query.Query;
-import com.mycomp.execspec.jiraplugin.dto.StoriesPayload;
-import com.mycomp.execspec.jiraplugin.dto.StoryModel;
-import com.mycomp.execspec.jiraplugin.dto.StoryPathsModel;
-import com.mycomp.execspec.jiraplugin.dto.StoryPayload;
+import com.mycomp.execspec.jiraplugin.dto.output.StoriesPayload;
+import com.mycomp.execspec.jiraplugin.dto.output.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.output.StoryPathsModel;
+import com.mycomp.execspec.jiraplugin.dto.output.StoryPayload;
 import com.mycomp.execspec.jiraplugin.service.StoryService;
 import org.apache.commons.lang.Validate;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +34,8 @@ import java.util.List;
  * @author stasyukd
  * @since 2.0.0-SNAPSHOT
  */
-@Path("/story")
-public class StoryResource {
+@Path("/find")
+public class StoryResourceFind {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -44,7 +44,7 @@ public class StoryResource {
     private SearchService searchService;
     private JiraAuthenticationContext authenticationContext;
 
-    public StoryResource(StoryService storyService, SearchService searchService, JiraAuthenticationContext authenticationContext) {
+    public StoryResourceFind(StoryService storyService, SearchService searchService, JiraAuthenticationContext authenticationContext) {
         this.storyService = storyService;
         this.searchService = searchService;
         this.authenticationContext = authenticationContext;
@@ -52,7 +52,7 @@ public class StoryResource {
 
     @GET
     @AnonymousAllowed
-    @Path("/list-story-paths/{projectKey}")
+    @Path("/story-paths/{projectKey}")
     @Produces({MediaType.APPLICATION_JSON})
     public StoryPathsModel listStoryPaths(@PathParam("projectKey") String projectKey) {
 
@@ -86,7 +86,7 @@ public class StoryResource {
 
     @GET
     @AnonymousAllowed
-    @Path("/list-all")
+    @Path("/all")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public StoriesPayload listAll() {
         List<StoryModel> all = storyService.all();
@@ -96,7 +96,7 @@ public class StoryResource {
 
     @GET
     @AnonymousAllowed
-    @Path("/find/{projectKey}/{issueKey}")
+    @Path("/for-issue/{projectKey}/{issueKey}")
     @Produces(MediaType.APPLICATION_JSON)
     public StoryPayload findForIssue(@PathParam("projectKey") String projectKey, @PathParam("issueKey") String issueKey) {
 
@@ -104,52 +104,5 @@ public class StoryResource {
         StoryPayload payload = new StoryPayload(byIssueKey);
         return payload;
     }
-
-    @POST
-    @AnonymousAllowed
-    @Path("/update")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public StoryModel update(StoryModel storyModel) {
-        Validate.notNull(storyModel);
-        Validate.notNull(storyModel.getIssueKey());
-        Validate.isTrue(storyModel.getId() != 0);
-        System.out.println("### in update method, storyModel - " + storyModel);
-        storyService.update(storyModel);
-        return storyModel;
-    }
-
-    @POST
-    @AnonymousAllowed
-    @Path("/add")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-//    public StoryModel add(String storyModelString) {
-    public StoryModel add(String storyModelString) {
-        ObjectMapper mapper = new ObjectMapper();
-        StoryModel storyModel = null;
-        try {
-            storyModel = mapper.readValue(storyModelString, StoryModel.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        log.debug("adding storyModel: \n" + storyModel);
-        Validate.notNull(storyModel);
-        Validate.notNull(storyModel.getProjectKey());
-        Validate.notNull(storyModel.getIssueKey());
-        Validate.notEmpty(storyModel.getNarrative(), "story narrative parameter was empty");
-        System.out.println("### in add method, storyModel - " + storyModel);
-        storyService.create(storyModel);
-        return storyModel;
-    }
-
-    @DELETE
-    @AnonymousAllowed
-    @Path("/delete/{storyId}")
-    public Response delete(@PathParam("storyId") Long storyId) {
-        storyService.delete(storyId);
-        return Response.ok("Successful deletion from server!").build();
-    }
-
 
 }

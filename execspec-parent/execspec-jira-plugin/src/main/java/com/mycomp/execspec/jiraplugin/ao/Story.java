@@ -12,6 +12,10 @@ public interface Story extends Entity {
 
     void setIssueKey(String issueKey);
 
+    Long getIssueId();
+
+    void setIssueLong();
+
     //    @NotNull
     String getProjectKey();
 

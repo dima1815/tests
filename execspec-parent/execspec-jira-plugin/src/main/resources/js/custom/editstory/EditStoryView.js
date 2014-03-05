@@ -150,15 +150,13 @@ function EditStoryView(controller) {
     this.getScenarios = function () {
         var scenariosArray = new Array();
         AJS.$(".scenario-input").each(function () {
-            var scenarioModel = new ScenarioModel();
             var scenarioText = this.value;
-
             console.log("escaping line breaks in:\n" + scenarioText);
             scenarioText = scenarioText.replace(/\r?\n/g, '\n');
             console.log("after escaping:\n" + scenarioText);
 
-            scenarioModel.text = scenarioText;
-            scenariosArray.push(scenarioModel);
+            var scenario = scenarioText;
+            scenariosArray.push(scenario);
         });
         return scenariosArray;
     }

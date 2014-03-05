@@ -19,12 +19,12 @@ public class MyStepsMain {
     @Given("something")
     public void someStep() {
         System.out.println("throwing exception from 'Given something'");
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Then("something should happen")
     public void verify() {
         System.out.println("-> verify");
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
 

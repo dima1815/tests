@@ -6,7 +6,6 @@ import org.jbehave.core.context.JFrameContextView;
 import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.*;
-import org.jbehave.core.steps.CandidateSteps;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
 import org.junit.Test;
@@ -16,11 +15,11 @@ import java.util.List;
 /**
  * Created by Dmytro on 2/15/14.
  */
-public class MyEmbedder extends JUnitStories {
+public class MyEmbedderTest extends JUnitStories {
 
     private final String jiraBaseUrl = "http://localhost:2990/jira";
 
-    public MyEmbedder() {
+    public MyEmbedderTest() {
         Context context = new Context();
         Format contextFormat = new ContextOutput(context);
         ContextView contextView = new JFrameContextView().sized(640, 120);
@@ -57,12 +56,12 @@ public class MyEmbedder extends JUnitStories {
         } finally {
             embedder.generateCrossReference();
 
-            List<CandidateSteps> candidateSteps = embedder.stepsFactory().createCandidateSteps();
-            embedder.reportStepdocs(configuration(), candidateSteps);
-            embedder.reportStepdocs();
-            embedder.reportMatchingStepdocs("Given *");
-            embedder.reportMatchingStepdocs("When *");
-            embedder.reportMatchingStepdocs("Then *");
+//            List<CandidateSteps> candidateSteps = embedder.stepsFactory().createCandidateSteps();
+//            embedder.reportStepdocs(configuration(), candidateSteps);
+//            embedder.reportStepdocs();
+//            embedder.reportMatchingStepdocs("Given *");
+//            embedder.reportMatchingStepdocs("When *");
+//            embedder.reportMatchingStepdocs("Then *");
         }
     }
 

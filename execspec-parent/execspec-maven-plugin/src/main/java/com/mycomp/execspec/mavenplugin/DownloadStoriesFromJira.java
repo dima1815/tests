@@ -8,9 +8,7 @@ package com.mycomp.execspec.mavenplugin;
  */
 
 
-import com.mycomp.execspec.jiraplugin.dto.ScenarioModel;
-import com.mycomp.execspec.jiraplugin.dto.StoriesPayload;
-import com.mycomp.execspec.jiraplugin.dto.StoryModel;
+import com.mycomp.execspec.jiraplugin.dto.output.*;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -91,13 +89,28 @@ public class DownloadStoriesFromJira extends AbstractMojo {
                 FileWriter fw = new FileWriter(outFile.getAbsoluteFile());
                 pw = new PrintWriter(fw);
 
-                pw.println("Narrative:");
-                pw.println(storyModel.getNarrative());
+                NarrativeModel narrative = storyModel.getNarrative();
+                Line[] lines = narrative.getLines();
+                for (Line line : lines) {
+                    StringBuilder strLine = new StringBuilder();
+                    for (LineToken lineToken : line.getTokens()) {
+                        strLine.append(lineToken.getText());
+                    }
+                    pw.println(strLine.toString());
+                }
 
+                pw.println();
                 List<ScenarioModel> scenarios = storyModel.getScenarios();
                 for (ScenarioModel scenario : scenarios) {
+                    Line[] scenarioLines = scenario.getLines();
+                    for (Line scenarioLine : scenarioLines) {
+                        StringBuilder strLine = new StringBuilder();
+                        for (LineToken lineToken : scenarioLine.getTokens()) {
+                            strLine.append(lineToken.getText());
+                        }
+                        pw.println(strLine.toString());
+                    }
                     pw.println();
-                    pw.println(scenario.getText());
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -8,24 +8,24 @@
 <div class="story-container">
     <div class="story">
         <div class="narrative">
-            <span class="label">Narrative:</span>
-            <div class="element">
-                {if str.startsWith($story.narrative, 'In order to')}
-//                     <span class="keyword">HA HA HA</span>
-//                     <br>
-//                     {$story.narrative|changeNewlineToBr}
-//                {else}
-                     {$story.narrative|changeNewlineToBr}
-                {/if}
-                {$story.narrative|changeNewlineToBr}
-            </div>
+            {foreach $curLineTokens in $story.narrative.lines}
+                <div class="token-line">
+                    {foreach $token in $curLineTokens}
+                        <span class='{$token.type}'>{$token.text}</span>
+                    {/foreach}
+                </div>
+            {/foreach}
         </div>
-        <div style="padding: 10px;">
+        <div class="scenarios">
             {foreach $scenario in $story.scenarios}
-                <div style="border: 1px;">
-//                        Scenario id - {$scenario.id}
-//                        <br/>
-                    {$scenario.text|changeNewlineToBr}
+                <div class="scenario">
+                    {foreach $curLineTokens in $scenario.lines}
+                        <div class="token-line">
+                            {foreach $token in $curLineTokens}
+                                <span class='{$token.type}'>{$token.text}</span>
+                            {/foreach}
+                        </div>
+                    {/foreach}
                 </div>
             {/foreach}
         </div>

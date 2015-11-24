@@ -1,4 +1,4 @@
-TEST 11
+TEST 12
 
 package org.dstadler.jgit;
 

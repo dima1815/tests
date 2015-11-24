@@ -1,3 +1,5 @@
+TEST 11
+
 package org.dstadler.jgit;
 
 import org.apache.commons.io.FileUtils;
